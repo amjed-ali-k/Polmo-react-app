@@ -15,7 +15,7 @@ export const SidebarASidebar = () => (
         { /* START SIDEBAR-OVERLAY: Close (x) */ }
         <Sidebar.Close>
             <SidebarTrigger tag={ 'a' } href="javascript:;">
-                <i className="fa fa-times-circle fa-fw"></i>
+                <i className="fa fa-times-circle fa-fw"/>
             </SidebarTrigger>
         </Sidebar.Close>
         { /* END SIDEBAR-OVERLAY: Close (x) */ }
