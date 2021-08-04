@@ -21,7 +21,7 @@ import { ProfileLeftNav } from "../../components/Profile/ProfileLeftNav";
 import { ProfileHeader } from "../../components/Profile/ProfileHeader";
 import {getUser, refreshtoken} from "../../../services/auth";
 import http from "../../../services/httpservice"
-import {apiUrl} from "../../../config.json";
+import {config} from "../../../config";
 import classNames from "classnames";
 let user = getUser();
 
@@ -40,7 +40,7 @@ const ProfileEdit = () => {
     }
     const doSubmit = async () => {
         try {
-            await http.put(apiUrl + '/users/me/edit/', fields);
+            await http.put(config.apiEndpoint + '/users/me/edit/', fields);
             user = await refreshtoken(fields.password);
             let alertscopy = {...alerts};
             alertscopy = {

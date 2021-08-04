@@ -1,8 +1,8 @@
 import http from "./httpservice";
-import {apiUrl} from "../config.json";
+import { config } from "../config"
 import jwtDecode from "jwt-decode";
 
-const apiEndpoint = apiUrl;
+const apiEndpoint = config.apiEndpoint;
 const user = getUser();
 export async function login(username, password) {
     var bodyFormData = new FormData();

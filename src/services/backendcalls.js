@@ -1,7 +1,7 @@
 import http from "./httpservice";
-import {apiUrl} from "../config.json";
+import { config } from "../config"
 
-const apiEndpoint = apiUrl;
+const apiEndpoint = config.apiEndpoint;
 
 export async function getUserHistory() {
     return await http.get(apiEndpoint + "/me/history")
