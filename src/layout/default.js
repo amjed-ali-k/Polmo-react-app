@@ -16,7 +16,7 @@ import './../styles/plugins/plugins.css';
 import {
     RoutedNavbars,
     RoutedSidebars,
-} from './../routes';
+} from '../routes';
 
 const favIcons = [
     { rel: 'icon', type: 'image/x-icon', href: require('./../images/favicons/favicon.ico') },

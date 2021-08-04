@@ -199,7 +199,7 @@ class Layout extends React.Component {
     }
 
     render() {
-        const { children, favIcons } = this.props;
+        const { children } = this.props;
         const sidebar = findChildByType(children, LayoutSidebar);
         const navbars = findChildrenByType(children, LayoutNavbar);
         const content = findChildByType(children, LayoutContent);
@@ -235,11 +235,6 @@ class Layout extends React.Component {
                     <title>{ config.siteTitle + (this.state.pageTitle ? ` - ${this.state.pageTitle}` : '') }</title>
                     <link rel="canonical" href={ config.siteCannonicalUrl } />
                     <meta name="description" content={ this.state.pageDescription } />
-                    {
-                        _.map(favIcons, (favIcon, index) => (
-                            <link { ...favIcon } key={ index } />
-                        ))
-                    }
 
                 </Helmet>
                 <ThemeClass>
