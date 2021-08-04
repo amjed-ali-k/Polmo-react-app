@@ -7,3 +7,8 @@
 
 
 Polmo is a low cost IOT based realtime air pollution sensing system. It uses advanced data sensing algorithms and machine learning to sense predict and prevent air pollution and its effects.
+
+
+### Demo Login
+username: `amjed`
+password: `amjed`
