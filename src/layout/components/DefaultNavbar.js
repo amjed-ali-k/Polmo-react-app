@@ -36,17 +36,17 @@ export const DefaultNavbar = () => (
                 <span className="navbar-text">
                     <Link to="/">Home</Link>
                 </span>
-                <span className="navbar-text px-2">
-                    <i className="fa fa-angle-right"/>
-                </span>
-                <span className="navbar-text">
-                    Page Link
-                </span>
+                {/*<span className="navbar-text px-2">*/}
+                {/*    <i className="fa fa-angle-right"/>*/}
+                {/*</span>*/}
+                {/*<span className="navbar-text">*/}
+                {/*    Page Link*/}
+                {/*</span>*/}
             </NavItem>
         </Nav>
         <Nav navbar className="ml-auto">
-            <NavbarActivityFeed />
-            <NavbarMessages className="ml-2" />
+            {/*<NavbarActivityFeed />*/}
+            {/*<NavbarMessages className="ml-2" />*/}
             <NavbarUser className="ml-2" />
         </Nav>
     </Navbar>
