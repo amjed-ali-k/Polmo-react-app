@@ -69,7 +69,7 @@ export class Grid extends React.Component {
         ));
 
         const floatWrapClasses = classNames({
-            ['float-grid-parent__static']: !fluid
+            'float-grid-parent__static': !fluid
         }, className, 'float-grid-parent');
 
         return(

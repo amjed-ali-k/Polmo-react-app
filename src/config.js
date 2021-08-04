@@ -18,12 +18,12 @@ var config = {
     srcHtmlLayout:          path.join(root, 'app', 'index.html'),
 
     // Site Config ====================================================
-    siteTitle:              'Fast Api Frontend',
-    siteDescription:        'Default Dashboard ready for Development',
-    siteCannonicalUrl:      'http://localhost:4100',
-    siteKeywords:           'react dashboard seed bootstrap',
+    siteTitle:              'Polmo',
+    siteDescription:        'Polmo is advanced IOT bases air pollution sensing system.',
+    siteCannonicalUrl:      'https://6ejhix.deta.dev',
+    siteKeywords:           'polmo pollution iot sensor project',
     scssIncludes:           [],
-    apiEndpoint:            "http://localhost:8000"
+    apiEndpoint:            "https://6ejhix.deta.dev"
 }
 
 module.exports = config;

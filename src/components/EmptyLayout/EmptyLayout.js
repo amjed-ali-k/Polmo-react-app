@@ -1,10 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
     withPageConfig
-} from './../../components/Layout';
+} from '../Layout';
 
 class EmptyLayout extends React.Component {
     static propTypes = {
