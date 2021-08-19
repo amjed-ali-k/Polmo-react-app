@@ -1,7 +1,6 @@
 import http from "./httpservice";
-import { config } from "../config"
+import {apiEndpoint} from "../config";
 
-const apiEndpoint = config.apiEndpoint;
 const node = 'NodeMCU-1.0';
 
 export async function getUserHistory() {
