@@ -1,5 +1,4 @@
 import React from 'react';
-import faker from 'faker/locale/en_US';
 import {
     Container,
     Row,
@@ -13,24 +12,6 @@ import { TrSystem } from "./components/trSystem"
 import {getSensorLastData, getSensorList} from "../../services/backendcalls";
 import _ from "lodash";
 
-const TrColors =  [
-        {
-            fill: "primary-02",
-            stroke: "primary"
-        },
-        {
-            fill: "purple-02",
-            stroke: "purple"
-        },
-        {
-            fill: "success-02",
-            stroke: "success"
-        },
-        {
-            fill: "yellow-02",
-            stroke: "yellow"
-        }
-    ]
 const ColorArr = [
     "dark",
     "blue",
@@ -47,6 +28,7 @@ const ColorArr = [
 const historylimit = 200;
 const bottomgraphmax = 200;
 const cardmax = 40;
+const refreshInterval = 25000;
 class Dashboard extends React.Component {
 
     state = {
@@ -101,6 +83,7 @@ class Dashboard extends React.Component {
 
     getSensorArray = () => {
         let arr = [];
+        console.log(this.state.sensors);
         _.forOwn(this.state.sensors, function(value, key) {
             let i = value;
             i.shortname = key;
@@ -115,7 +98,7 @@ class Dashboard extends React.Component {
         // Get Sensor Values
         await this.updateSensorValues()
         // Set interval.
-        this.interval = setInterval(async () => await this.updateSensorValues(), 10000);
+        this.interval = setInterval(async () => await this.updateSensorValues(), refreshInterval);
     }
 
     componentWillUnmount() {

@@ -46,6 +46,11 @@ const CardSystem = (props) => {
     if (parseInt(props.sensor.value[0]) < parseInt(props.sensor.value[1])){
         badge = 'success'
     }
+    // Round The Diffrence of values into 2 decimal places
+    let diffrence = Math.abs(props.sensor.value[0] - props.sensor.value[1])
+    diffrence = diffrence.toString(); //If it's not already a String
+    diffrence = diffrence.slice(0, (diffrence.indexOf("."))+3); //With 3 exposing the hundredths place
+
 
     return(
     <Card className="mb-3 mb-lg-0">
@@ -54,7 +59,7 @@ const CardSystem = (props) => {
                <span>
                     <Badge pill className="mb-3" color={badge} >
                         <i className={` fa fa-fw fa-caret-${ caret }`} />
-                        { Math.abs(props.sensor.value[0] - props.sensor.value[1]) } {props.sensor.settings.unit}
+                        { diffrence } {props.sensor.settings.unit}
                     </Badge>
                     <h6 className="mb-0">
                         { props.sensor.shortname }
