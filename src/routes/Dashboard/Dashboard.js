@@ -28,7 +28,7 @@ const ColorArr = [
 const historylimit = 200;
 const bottomgraphmax = 200;
 const cardmax = 40;
-const refreshInterval = 25000;
+const refreshInterval = 5000;
 class Dashboard extends React.Component {
 
     state = {
