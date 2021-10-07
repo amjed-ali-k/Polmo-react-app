@@ -31,7 +31,7 @@ export const getData = async () => {
   //     time: new Date().toISOString(),
   //   };
   // });
-  return await axios.get<SensorData[]>('https://6ejhix.deta.de/sensor/node/NodeMCU-1.0/last/all');
+  return await axios.get<SensorData[]>('https://6ejhix.deta.dev/sensor/node/NodeMCU-1.0/last/all');
 };
 
 export const getAqiData = async () => {
