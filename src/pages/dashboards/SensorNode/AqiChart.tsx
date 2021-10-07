@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -9,18 +9,18 @@ import {
   Typography,
   CardContent,
 } from "@material-ui/core";
-
 import { experimentalStyled } from "@material-ui/core/styles";
 import ExpandMoreTwoToneIcon from "@material-ui/icons/ExpandMoreTwoTone";
+import getWeek from "date-fns/getWeek";
+
 import TasksAnalyticsChart from "./AqiChartComponent";
 import { useAQIbackendCalls } from "src/api/hooks";
 
-
 // Type Definitions
 interface AqiDataType {
-  [key: number] : {
-    value: number[]
-  }
+  [key: number]: {
+    value: number[];
+  };
 }
 
 interface DataSetsType {
@@ -53,44 +53,60 @@ const generic = {
     labels: ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"],
   },
 };
+const periods = [
+  {
+    value: "current_week",
+    text: "This Week",
+  },
+  {
+    value: "yesterday",
+    text: "Last Week",
+  },
+  {
+    value: "last_month",
+    text: "Week 12",
+  },
+  {
+    value: "last_year",
+    text: "Week 11",
+  },
+];
 
 function AqiChart() {
-  
-  const periods = [
-    {
-      value: "current_week",
-      text: "This Week",
-    },
-    {
-      value: "yesterday",
-      text: "Last Week",
-    },
-    {
-      value: "last_month",
-      text: "Week 12",
-    },
-    {
-      value: "last_year",
-      text: "Week 11",
-    },
-  ];
-
-  const [aqiData, setAqiData] = useState<AqiDataType>(null)
+  const [aqiData, setAqiData] = useState<AqiDataType>(null); // TODO:  Move to Jotai Atom
   const actionRef1 = useRef<any>(null);
   const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
-  const [period, setPeriod] = useState<string>(periods[3].text);
+  const [period, setPeriod] = useState<string>("Loading...");
   const [dataSet, setDataSet] = useState<DataSetsType[]>(null);
 
-  useAQIbackendCalls(setAqiData)
+  useAQIbackendCalls(setAqiData); // TODO: Move To Page Root ( To avoid backend Calls While Rerendering Element )
 
-  if(aqiData){
+  let periods = [];
+  useEffect(() => {
+    if (aqiData) {
+      // Getting Current Week Number
+      const thisWeek = getWeek(new Date());
+      // Updating Periods and Keys - For Better User Understanding
+      for (var key of Object.keys(aqiData)) {
+        periods.push({
+          text:
+            parseInt(key) === thisWeek
+              ? "This Week"
+              : parseInt(key) === thisWeek - 1
+              ? "Last Week"
+              : `Week ${key.toString()}`,
+          value: key.toString(),
+        });
+      }
+      if (periods[0]) {
+        setPeriod(periods[0].text);
+      }
 
-  // Get Current Week Number
-   const today = new Date()
-    
-    
-  }
+      // Adding 3 Datas to DataSet [] - To use it as inital Data on chart
 
+
+    }
+  }, [aqiData]);
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -126,6 +142,7 @@ function AqiChart() {
                   onClick={() => {
                     setPeriod(_period.text);
                     setOpenMenuPeriod(false);
+                    // TODO: Add function to change DataSet
                   }}
                 >
                   {_period.text}
@@ -138,6 +155,14 @@ function AqiChart() {
       />
       <CardContent sx={{ pt: 0 }}>
         <Box display="flex" alignItems="center" pl={1} pb={3}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <DotPrimaryLight />
+            Next Week
+          </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
@@ -167,8 +192,6 @@ function AqiChart() {
 }
 
 export default AqiChart;
-
-
 
 const TasksAnalyticsChartWrapper = experimentalStyled(TasksAnalyticsChart)(
   ({ theme }) => `
