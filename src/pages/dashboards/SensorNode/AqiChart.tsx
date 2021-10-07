@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -7,105 +7,93 @@ import {
   Menu,
   MenuItem,
   Typography,
-  CardContent
-} from '@material-ui/core';
+  CardContent,
+} from "@material-ui/core";
 
-import { experimentalStyled } from '@material-ui/core/styles';
-import ExpandMoreTwoToneIcon from '@material-ui/icons/ExpandMoreTwoTone';
-import TasksAnalyticsChart from './AqiChartComponent';
-import { getAqiData } from 'src/api/backend';
+import { experimentalStyled } from "@material-ui/core/styles";
+import ExpandMoreTwoToneIcon from "@material-ui/icons/ExpandMoreTwoTone";
+import TasksAnalyticsChart from "./AqiChartComponent";
+import { useAQIbackendCalls } from "src/api/hooks";
 
-const TasksAnalyticsChartWrapper = experimentalStyled(TasksAnalyticsChart)(
-  ({ theme }) => `
-        height: 200px;
-`
-);
 
-const DotPrimaryLight = experimentalStyled('span')(
-  ({ theme }) => `
-    border-radius: 22px;
-    background: ${theme.colors.primary.lighter};
-    width: ${theme.spacing(1.5)};
-    height: ${theme.spacing(1.5)};
-    display: inline-block;
-    margin-right: ${theme.spacing(0.5)};
-`
-);
+// Type Definitions
+interface AqiDataType {
+  [key: number] : {
+    value: number[]
+  }
+}
 
-const DotPrimary = experimentalStyled('span')(
-  ({ theme }) => `
-    border-radius: 22px;
-    background: ${theme.colors.primary.main};
-    width: ${theme.spacing(1.5)};
-    height: ${theme.spacing(1.5)};
-    display: inline-block;
-    margin-right: ${theme.spacing(0.5)};
-`
-);
+interface DataSetsType {
+  label: string;
+  backgroundColor: string;
+  data: number[];
+  barThickness: number;
+  maxBarThickness: number;
+  barPercentage: number;
+  categoryPercentage: number;
+}
+
+const generic = {
+  month: {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+  },
+  week: {
+    labels: ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"],
+  },
+};
 
 function AqiChart() {
   
-
-  const transactions = {
-    next: [32,43,53,12,53,53,75],
-    current: [28, 47, 41, 34, 69, 91, 49],
-    last: [38, 85, 64, 40, 97, 82, 58]
-  };
-
-  const generic = {
-    month: {
-      labels: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec'
-      ]
-    },
-    week: {
-      labels: [
-        'Sun',
-        'Mon',
-        'Tue',
-        'Web',
-        'Thu',
-        'Fri',
-        'Sat'
-      ]
-    }
-  };
-
   const periods = [
     {
-      value: 'current_week',
-      text: 'This Week'
+      value: "current_week",
+      text: "This Week",
     },
     {
-      value: 'yesterday',
-      text: 'Last Week'
+      value: "yesterday",
+      text: "Last Week",
     },
     {
-      value: 'last_month',
-      text: 'Week 12'
+      value: "last_month",
+      text: "Week 12",
     },
     {
-      value: 'last_year',
-      text: 'Week 11'
-    }
+      value: "last_year",
+      text: "Week 11",
+    },
   ];
 
+  const [aqiData, setAqiData] = useState<AqiDataType>(null)
   const actionRef1 = useRef<any>(null);
   const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
   const [period, setPeriod] = useState<string>(periods[3].text);
+  const [dataSet, setDataSet] = useState<DataSetsType[]>(null);
+
+  useAQIbackendCalls(setAqiData)
+
+  if(aqiData){
+
+  // Get Current Week Number
+   const today = new Date()
+    
+    
+  }
+
 
   return (
-    <Card sx={{ height: '100%' }}>
+    <Card sx={{ height: "100%" }}>
       <CardHeader
         action={
           <>
@@ -123,14 +111,13 @@ function AqiChart() {
               anchorEl={actionRef1.current}
               onClose={() => setOpenMenuPeriod(false)}
               open={openPeriod}
-              
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right'
+                vertical: "bottom",
+                horizontal: "right",
               }}
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
+                vertical: "top",
+                horizontal: "right",
               }}
             >
               {periods.map((_period) => (
@@ -154,7 +141,7 @@ function AqiChart() {
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ display: 'flex', alignItems: 'center', mr: 2 }}
+            sx={{ display: "flex", alignItems: "center", mr: 2 }}
           >
             <DotPrimary />
             Current Week
@@ -162,7 +149,7 @@ function AqiChart() {
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ display: 'flex', alignItems: 'center' }}
+            sx={{ display: "flex", alignItems: "center" }}
           >
             <DotPrimaryLight />
             Last Week
@@ -170,7 +157,7 @@ function AqiChart() {
         </Box>
         <Box height={200}>
           <TasksAnalyticsChartWrapper
-            data={transactions}
+            data={aqiData}
             labels={generic.week.labels}
           />
         </Box>
@@ -182,12 +169,31 @@ function AqiChart() {
 export default AqiChart;
 
 
-const processData = () => {
-  getAqiData().then(({date, value})=> {
 
+const TasksAnalyticsChartWrapper = experimentalStyled(TasksAnalyticsChart)(
+  ({ theme }) => `
+        height: 200px;
+`
+);
 
-    
+const DotPrimaryLight = experimentalStyled("span")(
+  ({ theme }) => `
+    border-radius: 22px;
+    background: ${theme.colors.primary.lighter};
+    width: ${theme.spacing(1.5)};
+    height: ${theme.spacing(1.5)};
+    display: inline-block;
+    margin-right: ${theme.spacing(0.5)};
+`
+);
 
-  })
-}
-
+const DotPrimary = experimentalStyled("span")(
+  ({ theme }) => `
+    border-radius: 22px;
+    background: ${theme.colors.primary.main};
+    width: ${theme.spacing(1.5)};
+    height: ${theme.spacing(1.5)};
+    display: inline-block;
+    margin-right: ${theme.spacing(0.5)};
+`
+);
