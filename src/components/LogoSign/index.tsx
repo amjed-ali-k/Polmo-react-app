@@ -75,7 +75,7 @@ function Logo() {
 
 
   return (
-    <Tooltip title="Tokyo Free Black React Admin Dashboard" arrow>
+    <Tooltip title="Polmo - The Advanced Air Polution Monitoring Network" arrow>
       <LogoWrapper to="/overview">
         <LogoSignWrapper>
           <LogoSign>

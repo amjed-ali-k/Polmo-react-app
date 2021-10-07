@@ -113,7 +113,7 @@ function Logo() {
           <Tooltip title="Version 1.0" arrow placement="right">
             <VersionBadge>1.0</VersionBadge>
           </Tooltip>
-          <LogoText>Tokyo Free Black</LogoText>
+          <LogoText>POLMO 1.0</LogoText>
         </LogoTextWrapper>
       </Hidden>
     </LogoWrapper>

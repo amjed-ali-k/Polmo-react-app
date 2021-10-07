@@ -117,15 +117,15 @@ function Status500() {
               <Container maxWidth="sm">
                 <Box textAlign="center">
                   <TypographyPrimary variant="h1" sx={{ my: 2 }}>
-                    Tokyo Free Black React Admin Dashboard
+                  POLMO - The Advanced Air Pollution Monitoring Network
                   </TypographyPrimary>
                   <TypographySecondary
                     variant="h4"
                     fontWeight="normal"
                     sx={{ mb: 4 }}
                   >
-                    Tokyo Free Black Typescript Dashboard is built using the latest industry standards and features a clean and premium design style, making use of colors and accents to improve the user experience for all included flows and pages.
-                  </TypographySecondary>
+                    POLMO is a low cost IoT based real time air pollution monitoring system. It uses advanced sensing technologies to collect pollution information from the real world sensors and provides real time data visualization, machine learning based air quality prediction, warning information for human beings, animals, and plants due to air pollution.
+          </TypographySecondary>
                   <Button
                     href="/overview"
                     size="large"

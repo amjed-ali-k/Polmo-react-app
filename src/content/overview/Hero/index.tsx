@@ -85,7 +85,7 @@ function Hero() {
         <Grid item md={10} lg={8} mx="auto">
           <LabelWrapper color="success">Version 1.0.0</LabelWrapper>
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Tokyo Free Black React Admin Dashboard
+            POLMO - The Advanced Air Pollution Monitoring Network
           </TypographyH1>
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
@@ -93,7 +93,7 @@ function Hero() {
             color="text.secondary"
             fontWeight="normal"
           >
-            Tokyo Free Black Typescript Dashboard is built using the latest industry standards and features a clean and premium design style, making use of colors and accents to improve the user experience for all included flows and pages.
+            POLMO is a low cost IoT based real time air pollution monitoring system. It uses advanced sensing technologies to collect pollution information from the real world sensors and provides real time data visualization, machine learning based air quality prediction, warning information for human beings, animals, and plants due to air pollution.
           </TypographyH2>
           <Button
             component={RouterLink}
@@ -101,19 +101,9 @@ function Hero() {
             size="large"
             variant="contained"
           >
-            Browse Live Preview
+            View the Polmo Urban Node - Demo
           </Button>
-          <Button
-            sx={{ ml: 2 }}
-            component="a"
-            target="_blank"
-            rel="noopener"
-            href="https://bloomui.com/product/tokyo-free-black-react-typescript-material-ui-admin-dashboard"
-            size="large"
-            variant="text"
-          >
-            Key Features
-          </Button>
+        
           <Grid container spacing={3} mt={5}>
             <Grid item md={6}>
               <MuiAvatar>
@@ -128,7 +118,7 @@ function Hero() {
                 <img src="/static/images/logo/typescript.svg" alt="Typescript" />
               </TsAvatar>
               <Typography variant="h4">
-                <Box sx={{ pb: 2 }}><b>Built with Typescript</b></Box><Typography component="span" variant="subtitle2"> - Tokyo Free Black features a modern technology stack and is built with React + Typescript.</Typography>
+                <Box sx={{ pb: 2 }}><b>Built with Typescript</b></Box><Typography component="span" variant="subtitle2"> - Polmo web ui features a modern technology stack and is built with React + Typescript.</Typography>
               </Typography>
             </Grid>
           </Grid>
