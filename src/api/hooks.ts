@@ -67,7 +67,7 @@ export function useBackEndCalls() {
   useEffect(() => {
     const val = setInterval(() => {
       getData()
-        .then((data) => {
+        .then(({data}) => {
           setSensorReadings(data);
           setLoaded(true);
           addValuesToSensorHistory<SensorData>(
