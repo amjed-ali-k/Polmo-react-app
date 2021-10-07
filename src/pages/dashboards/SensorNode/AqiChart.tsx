@@ -8,20 +8,17 @@ import {
   MenuItem,
   Typography,
   CardContent,
+  Skeleton
 } from "@material-ui/core";
 import { experimentalStyled } from "@material-ui/core/styles";
 import ExpandMoreTwoToneIcon from "@material-ui/icons/ExpandMoreTwoTone";
 import getWeek from "date-fns/getWeek";
+import {useAtom} from 'jotai'
 
 import TasksAnalyticsChart from "./AqiChartComponent";
-import { useAQIbackendCalls } from "src/api/hooks";
+import { aqiDataAtom, aqiLoadedAtom } from "src/api/hooks";
 
 // Type Definitions
-interface AqiDataType {
-  [key: number]: {
-    value: number[];
-  };
-}
 
 interface DataSetsType {
   label: string;
@@ -31,6 +28,12 @@ interface DataSetsType {
   maxBarThickness: number;
   barPercentage: number;
   categoryPercentage: number;
+}
+
+interface PeriodType {
+  text: string;
+  value: string;
+  index: number;
 }
 
 const generic = {
@@ -53,61 +56,59 @@ const generic = {
     labels: ["Sun", "Mon", "Tue", "Web", "Thu", "Fri", "Sat"],
   },
 };
-const periods = [
-  {
-    value: "current_week",
-    text: "This Week",
-  },
-  {
-    value: "yesterday",
-    text: "Last Week",
-  },
-  {
-    value: "last_month",
-    text: "Week 12",
-  },
-  {
-    value: "last_year",
-    text: "Week 11",
-  },
-];
 
+// let periods = [];
 function AqiChart() {
-  const [aqiData, setAqiData] = useState<AqiDataType>(null); // TODO:  Move to Jotai Atom
+  const [aqiData] = useAtom(aqiDataAtom);
+  const [loaded] = useAtom(aqiLoadedAtom)
   const actionRef1 = useRef<any>(null);
+  const [periods, setPeriods] = useState<PeriodType[]>([])
   const [openPeriod, setOpenMenuPeriod] = useState<boolean>(false);
-  const [period, setPeriod] = useState<string>("Loading...");
-  const [dataSet, setDataSet] = useState<DataSetsType[]>(null);
+  const [period, setPeriod] = useState<PeriodType>(null);
+  const [dataSet, setDataSet] = useState<DataSetsType[]>([]);
+  
 
-  useAQIbackendCalls(setAqiData); // TODO: Move To Page Root ( To avoid backend Calls While Rerendering Element )
-
-  let periods = [];
   useEffect(() => {
     if (aqiData) {
+      let _dataSet = [];
+      let _periods = [];
       // Getting Current Week Number
       const thisWeek = getWeek(new Date());
       // Updating Periods and Keys - For Better User Understanding
       for (var key of Object.keys(aqiData)) {
-        periods.push({
-          text:
-            parseInt(key) === thisWeek
-              ? "This Week"
-              : parseInt(key) === thisWeek - 1
-              ? "Last Week"
-              : `Week ${key.toString()}`,
+        const label =
+          parseInt(key) === thisWeek
+            ? "This Week"
+            : parseInt(key) === thisWeek - 1
+            ? "Last Week"
+            : `Week ${key.toString()}`;
+
+   
+        _periods.push({
+          text: label,
           value: key.toString(),
+          index: _periods.length
         });
+
+        _dataSet.push(aqiData[key]);
+
       }
-      if (periods[0]) {
-        setPeriod(periods[0].text);
-      }
-
-      // Adding 3 Datas to DataSet [] - To use it as inital Data on chart
-
-
+      setDataSet(_dataSet.reverse());
+      setPeriods(_periods.reverse())
+      // Only set period if it exists. Server backend calls takes time, so results will be null at first time.
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aqiData]);
 
+  useEffect(() => {
+    setPeriod(periods[0])
+  }, [periods])
+
+  // console.clear()
+  // console.log('DataSet', dataSet)
+  console.log('Period', period)
+
+  // console.log('Sliced Dataset', dataSet.slice(period.index -1, period.index+1))
   return (
     <Card sx={{ height: "100%" }}>
       <CardHeader
@@ -121,7 +122,7 @@ function AqiChart() {
               onClick={() => setOpenMenuPeriod(true)}
               endIcon={<ExpandMoreTwoToneIcon fontSize="small" />}
             >
-              {period}
+              { (loaded && period?.text)? period.text: 'Loading...'}
             </Button>
             <Menu
               anchorEl={actionRef1.current}
@@ -140,12 +141,12 @@ function AqiChart() {
                 <MenuItem
                   key={_period.value}
                   onClick={() => {
-                    setPeriod(_period.text);
+                    setPeriod(_period);
                     setOpenMenuPeriod(false);
                     // TODO: Add function to change DataSet
                   }}
                 >
-                  {_period.text}
+                  {_period?.text}
                 </MenuItem>
               ))}
             </Menu>
@@ -158,11 +159,12 @@ function AqiChart() {
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ display: "flex", alignItems: "center" }}
+            sx={{ display: "flex", alignItems: "center", mr: 2  }}
           >
             <DotPrimaryLight />
             Next Week
           </Typography>
+
           <Typography
             variant="body2"
             color="text.secondary"
@@ -181,10 +183,10 @@ function AqiChart() {
           </Typography>
         </Box>
         <Box height={200}>
-          <TasksAnalyticsChartWrapper
-            data={aqiData}
+        {loaded? <TasksAnalyticsChartWrapper
+            data={formatColors(dataSet, period?.index)}
             labels={generic.week.labels}
-          />
+          />: <Skeleton />}
         </Box>
       </CardContent>
     </Card>
@@ -192,6 +194,15 @@ function AqiChart() {
 }
 
 export default AqiChart;
+
+const formatColors = (dataSet: DataSetsType[], index: number) => {
+  const chip = dataSet.slice(index-1, index+2)
+  if (index === 0) return { current: chip[0], next: chip[1]}
+  if (index === dataSet.length) return { prev: chip[0], current: chip[1]}
+  console.log('Dataset Length',dataSet.length)
+  console.log('Chip', chip)
+  return { prev: chip[0], current: chip[1], next: chip[2]}
+}
 
 const TasksAnalyticsChartWrapper = experimentalStyled(TasksAnalyticsChart)(
   ({ theme }) => `

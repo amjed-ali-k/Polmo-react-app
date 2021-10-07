@@ -16,13 +16,6 @@ const TasksAnalyticsChart: FC<TasksAnalyticsChartProps> = ({
 }) => {
   const theme = useTheme();
 
-  // Process Data
-
-  // Get Current Week Number
-
-  // Generate DataSet
-
-  // Update Current Week
 
   const data = {
     datasets: [
@@ -47,7 +40,7 @@ const TasksAnalyticsChart: FC<TasksAnalyticsChartProps> = ({
       {
         label: 'Last Week',
         backgroundColor: theme.colors.primary.lighter,
-        data: dataProp.last,
+        data: dataProp.prev,
         barThickness: 12,
         maxBarThickness: 18,
         barPercentage: 0.5,

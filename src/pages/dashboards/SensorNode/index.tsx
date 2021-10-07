@@ -11,10 +11,11 @@ import AqiChart from "./AqiChart";
 import IndividualSensors from "./IndividualSensors";
 import LineChart from "./LineChart";
 import NodeDetails from "./NodeDetails";
-import { useBackEndCalls } from "src/api/hooks";
+import { useAQIbackendCalls, useBackEndCalls } from "src/api/hooks";
 import NodeMap from "./NodeMap";
 
 function DashboardTasks() {
+  useAQIbackendCalls(); 
   useBackEndCalls()
   return (
     <>

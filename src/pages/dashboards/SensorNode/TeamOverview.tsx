@@ -82,7 +82,7 @@ function TeamOverview() {
               >
                 <AvatarWrapper
                   alt="Sugdev"
-                  src="/static/images/avatars/5.jpg"
+                  src="/static/images/avatars/sugdev.jpg"
                 />
               </Badge>
               <Box sx={{ ml: 1.5 }}>

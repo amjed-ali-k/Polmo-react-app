@@ -9,6 +9,15 @@ import { getData, getAqiData } from "./backend";
 export const counterAtom = atom({});
 export const timerAtom = atom({ timer: null, count: 0 });
 export const loadedAtom = atom(false);
+export const aqiLoadedAtom = atom(false);
+export const aqiDataAtom = atom<AqiDataType>({})
+
+interface AqiDataType {
+  [key: number]: {
+    value: number[];
+  };
+}
+
 
 type shType = {
   time: Date[];
@@ -129,7 +138,12 @@ const addValuesToSensorHistory = <T>(
 };
 
 
-export const useAQIbackendCalls = (setAqiData) => {
+export const useAQIbackendCalls = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [aqiLoaded, setAqiLoaded] = useAtom(aqiLoadedAtom);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [aqiData, setAqiData] = useAtom(aqiDataAtom);
+
   useEffect(() => {
       getAqiData().then(({ date, value }: { date: Date[]; value: number[]}) => {
         let weeklyOrderedObject = {};
@@ -139,12 +153,13 @@ export const useAQIbackendCalls = (setAqiData) => {
           const weeknum = getWeek(d);
     
           if (!weeklyOrderedObject[weeknum]) {
-            weeklyOrderedObject[weeknum] = [0, 0, 0, 0, 0, 0, 0];
+            weeklyOrderedObject[weeknum] = [];
           }
           // weeklyOrderedObject[weeknum]?.date.push(d);
           weeklyOrderedObject[weeknum][d.getDay()] = value[i]
         });
         setAqiData(weeklyOrderedObject);
+        setAqiLoaded(true)
       });
     return () => {
     }
