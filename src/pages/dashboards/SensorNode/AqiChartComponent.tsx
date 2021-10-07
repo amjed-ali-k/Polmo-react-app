@@ -16,6 +16,14 @@ const TasksAnalyticsChart: FC<TasksAnalyticsChartProps> = ({
 }) => {
   const theme = useTheme();
 
+  // Process Data
+
+  // Get Current Week Number
+
+  // Generate DataSet
+
+  // Update Current Week
+
   const data = {
     datasets: [
       {

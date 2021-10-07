@@ -1,7 +1,10 @@
-import { getData } from "./backend";
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
+import { getWeek } from "date-fns";
+
 import { sensors } from "./constants";
+import { getData, getAqiData } from "./backend";
+
 
 export const counterAtom = atom({});
 export const timerAtom = atom({ timer: null, count: 0 });
@@ -41,45 +44,38 @@ export const sensorHistoryAtom = atom<shType>({
   T: [],
 });
 
+/**
+ *  Function to fetch sensor data from backend and store it into Jotai Global State. Should be called only once.
+ */
 export function useBackEndCalls() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sensorReadings, setSensorReadings] = useAtom(counterAtom);
   const [sensorHistory, setSensorHistory] = useAtom(sensorHistoryAtom);
-  const [timer, setTimer] = useAtom(timerAtom);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loaded, setLoaded] = useAtom(loadedAtom);
 
-  useEffect(() => {
-    let lap = { ...timer };
-    lap.count += 1;
-    setTimer(lap);
 
-    if (lap.count <= 1) {
-      const val = setInterval(() => {
-        getData()
-          .then((data) => {
-            setSensorReadings(data);
-            setLoaded(true);
-            addValuesToSensorHistory<SensorData>(
-              data as SensorData[],
-              sensorHistory,
-              setSensorHistory
-            );
-          })
-          .catch((reason) => {
-            // TODO: API Error
-          });
-      }, 10000);
-      setTimer({ timer: val, count: timer.count });
-    }
+  useEffect(() => {
+    const val = setInterval(() => {
+      getData()
+        .then((data) => {
+          setSensorReadings(data);
+          setLoaded(true);
+          addValuesToSensorHistory<SensorData>(
+            data as SensorData[],
+            sensorHistory,
+            setSensorHistory
+          );
+        })
+        .catch((reason) => {
+          // TODO: API Error
+        });
+    }, 10000);
+
     return () => {
-      let lap = { ...timer };
-      lap.count -= 1;
-      if (lap.count <= 0) {
-        clearInterval(lap.timer);
-        setTimer({ count: 0, timer: null });
-      } else {
-        setTimer(lap);
-      }
+      clearInterval(val);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 
@@ -110,9 +106,8 @@ const addValuesToSensorHistory = <T>(
   let sh = { ...sensorHistory };
 
   sensors.forEach((element) => {
-
     // Catch Latest Time Stamp from the array.
-    const date = new Date(data[element].time)
+    const date = new Date(data[element].time);
     if (time < date) {
       time = date;
     }
@@ -132,3 +127,28 @@ const addValuesToSensorHistory = <T>(
 
   setSensorHistory(sh);
 };
+
+
+export const useAQIbackendCalls = (setAqiData) => {
+  useEffect(() => {
+      getAqiData().then(({ date, value }: { date: Date[]; value: number[]}) => {
+        let weeklyOrderedObject = {};
+        // console.log(value)
+    
+        date.forEach((d, i) => {
+          const weeknum = getWeek(d);
+    
+          if (!weeklyOrderedObject[weeknum]) {
+            weeklyOrderedObject[weeknum] = [0, 0, 0, 0, 0, 0, 0];
+          }
+          // weeklyOrderedObject[weeknum]?.date.push(d);
+          weeklyOrderedObject[weeknum][d.getDay()] = value[i]
+        });
+        setAqiData(weeklyOrderedObject);
+      });
+    return () => {
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+}

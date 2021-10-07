@@ -17,10 +17,10 @@ import React from "react";
 import { SensorDetails } from "src/api/constants";
 import CircularStatic from "./CircularProgressWithLabel";
 import { useAtom } from "jotai";
-import { counterAtom, loadedAtom, useBackEndCalls } from "src/api/hooks";
+import { counterAtom, loadedAtom } from "src/api/hooks";
 
 function IndividualSensors() {
-  const [sensorReadings, setSensorReadings] = useAtom(counterAtom);
+  const [sensorReadings] = useAtom(counterAtom);
   const [loaded] = useAtom(loadedAtom)
  
   return (

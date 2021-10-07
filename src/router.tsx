@@ -19,15 +19,10 @@ const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Dashboards
 
-const Tasks = Loader(lazy(() => import('src/content/dashboards/Tasks')));
 const Polmo = Loader(lazy(() => import('src/pages/dashboards/SensorNode')));
 
 // Applications
 
-const Messenger = Loader(lazy(() => import('src/content/applications/Messenger')));
-const Transactions = Loader(lazy(() => import('src/content/applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/content/applications/Users/profile')));
-const UserSettings = Loader(lazy(() => import('src/content/applications/Users/settings')));
 
 // Components
 
@@ -120,62 +115,12 @@ const routes: PartialRouteObject[] = [
         )
       },
       {
-        path: 'tasks',
-        element: <Tasks />
-      },
-      {
-        path: 'messenger',
-        element: <Messenger />
-      },
-      {
         path: 'crypto',
         element: <Polmo />
       }
     ]
   },
-  {
-    path: 'management',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
-      {
-        path: '/',
-        element: (
-          <Navigate
-            to="/management/transactions"
-            replace
-          />
-        )
-      },
-      {
-        path: 'transactions',
-        element: <Transactions />
-      },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '/',
-            element: (
-              <Navigate
-                to="details"
-                replace
-              />
-            )
-          },
-          {
-            path: 'details',
-            element: <UserProfile />
-          },
-          {
-            path: 'settings',
-            element: <UserSettings />
-          },
-        ]
-      }
-    ]
-  },
+
   {
     path: 'components',
     element: (
