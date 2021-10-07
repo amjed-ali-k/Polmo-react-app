@@ -1,6 +1,6 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
-import { getWeek } from "date-fns";
+import getWeek from "date-fns/getWeek"
 
 import { sensors } from "./constants";
 import { getData, getAqiData } from "./backend";
