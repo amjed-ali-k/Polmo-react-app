@@ -97,7 +97,7 @@ function Hero() {
           </TypographyH2>
           <Button
             component={RouterLink}
-            to="/dashboards/crypto"
+            to="/demo/urban-node"
             size="large"
             variant="contained"
           >

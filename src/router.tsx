@@ -100,7 +100,7 @@ const routes: PartialRouteObject[] = [
     ]
   },
   {
-    path: 'dashboards',
+    path: 'demo',
     element: (
       <BaseLayout />
     ),
@@ -109,13 +109,13 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: (
           <Navigate
-            to="/dashboards/tasks"
+            to="/demo/urban-node"
             replace
           />
         )
       },
       {
-        path: 'crypto',
+        path: 'urban-node',
         element: <Polmo />
       }
     ]

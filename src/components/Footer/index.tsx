@@ -1,4 +1,4 @@
-import { Box, Container, Link, Typography } from '@material-ui/core';
+import { Box, Container, Typography } from '@material-ui/core';
 import { experimentalStyled } from '@material-ui/core/styles';
 
 const FooterWrapper = experimentalStyled(Box)(
