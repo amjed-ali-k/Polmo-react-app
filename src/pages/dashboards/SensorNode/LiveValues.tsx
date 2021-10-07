@@ -12,9 +12,14 @@ function LiveValues() {
   const [loaded] = useAtom(loadedAtom)
 
   let readingsArray = []
-  if(loaded) {sensors.map((item)=> (
+  if(loaded) {
+    sensors.forEach((item)=> {
+     
+      console.log('SR', item);
+      console.log('ST', sensorReadings)
+     if(sensorReadings[item].value)
     readingsArray.push(sensorReadings[item].value)
-  ))}
+  })}
   
 
   const data = {

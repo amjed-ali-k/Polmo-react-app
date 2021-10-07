@@ -1,37 +1,21 @@
-// import { sensors } from "./constants";
-import axios from 'redaxios';
+import axios from "redaxios";
+import { SensorDataCollection, sensors, ServerData } from "./constants";
 
-
-interface SensorData {
-  time: string;
-  value: number;
-  slug:
-    | "CO"
-    | "H2S"
-    | "SO2"
-    | "NO2"
-    | "O3"
-    | "CH4"
-    | "NH3"
-    | "CO2"
-    | "PM1.0"
-    | "PM2.5"
-    | "PM10"
-    | "H"
-    | "T";
-}
-
-export const getData = async () => {
-  // let data = {};
-  // await setTimeout(() => {}, 5000);
-  // sensors.forEach((element) => {
-  //   data[element] = {
-  //     slug: element,
-  //     value: Math.round(Math.random() * 100),
-  //     time: new Date().toISOString(),
-  //   };
-  // });
-  return await axios.get<SensorData[]>('https://6ejhix.deta.dev/sensor/node/NodeMCU-1.0/last/all');
+export const getData = async (): Promise<SensorDataCollection> => {
+  let sd = {};
+  const { data } = await axios.get<ServerData[]>(
+    "https://6ejhix.deta.dev/sensor/node/NodeMCU-1.0/last/all"
+  );
+  data.forEach((element) => {
+    if (sensors.includes(element.sensor)) {
+      sd[element.sensor] = {
+        slug: element.sensor,
+        value: element.value,
+        time: new Date(element.time),
+      };
+    }
+  });
+  return sd;
 };
 
 export const getAqiData = async () => {
@@ -40,7 +24,7 @@ export const getAqiData = async () => {
   let data = {};
   Array.from({ length: 35 }, () => {
     aqi.push(Math.round(Math.random() * 10), 2);
-    return null
+    return null;
   });
   aqi.forEach((val, index) => {
     var d = new Date();
@@ -75,7 +59,4 @@ export const getAqiData = async () => {
   };
 };
 
-
-
 // AXIOS
-

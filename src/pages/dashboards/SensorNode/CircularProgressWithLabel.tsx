@@ -7,18 +7,18 @@ import {
   } from '@material-ui/core';
   
 
-function CircularProgressWithLabel({value, unit='/ 100', ...rest}) {
+function CircularProgressWithLabel({value,percent, unit='/ 100', ...rest}) {
   const [progress, setProgress] = React.useState(0);
   React.useEffect(() => {
-    if(progress !== Math.round(value) ){
+    if(progress !== Math.round(percent) ){
     setTimeout(() => {
-      setProgress((prevProgress) => (progress < Math.round(value) ? prevProgress + 1 : prevProgress - 1));
+      setProgress((prevProgress) => (progress < Math.round(percent) ? prevProgress + 1 : prevProgress - 1));
     }, 10);
   }
     return () => {
     
     };
-  }, [progress, value]);
+  }, [progress, percent]);
 
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
@@ -37,7 +37,7 @@ function CircularProgressWithLabel({value, unit='/ 100', ...rest}) {
         }}
       >
         <Typography variant="h1" component="div" color="text.secondary">
-          {`${Math.round(progress)}`}
+          {`${Math.round(value)}`}
         </Typography>
         <Typography variant='caption' sx={{ mt:'-8px'}}>
         {`${unit}`}

@@ -104,11 +104,6 @@ function AqiChart() {
     setPeriod(periods[0])
   }, [periods])
 
-  // console.clear()
-  // console.log('DataSet', dataSet)
-  console.log('Period', period)
-
-  // console.log('Sliced Dataset', dataSet.slice(period.index -1, period.index+1))
   return (
     <Card sx={{ height: "100%" }}>
       <CardHeader
@@ -199,8 +194,6 @@ const formatColors = (dataSet: DataSetsType[], index: number) => {
   const chip = dataSet.slice(index-1, index+2)
   if (index === 0) return { current: chip[0], next: chip[1]}
   if (index === dataSet.length) return { prev: chip[0], current: chip[1]}
-  console.log('Dataset Length',dataSet.length)
-  console.log('Chip', chip)
   return { prev: chip[0], current: chip[1], next: chip[2]}
 }
 

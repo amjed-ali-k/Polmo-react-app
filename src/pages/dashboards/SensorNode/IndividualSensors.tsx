@@ -34,17 +34,20 @@ function IndividualSensors() {
         <Typography variant="h3">Individual Sensor Visualization</Typography>
       </Box>
       <Grid container justifyContent="space-evenly" spacing={3}>
-        {SensorDetails.map((item, index) => (
+        {SensorDetails.map((item, index) => {
+          const percent = (sensorReadings[item.slug]?.value / item.settings.max)  * 100
+          return(
           <Grid key={item.slug} item>{loaded?
             <SensorCard
               title={item.slug}
-              value={sensorReadings[item.slug].value}
+              value={sensorReadings[item.slug]?.value}
+              percent={percent}
               name={item.name}
               status="Active"
               unit={item.settings.unit}
             />:<Skeleton variant="rectangular" width={250} height={258} />}
           </Grid>
-        ))}
+        )})}
       </Grid>
     </>
   );
@@ -55,6 +58,7 @@ export default IndividualSensors;
 function SensorCard({
   title,
   value,
+  percent,
   date = "12-Jun-2021 12:08 PM",
   name = "Carbon DiOxide",
   status = "Active",
@@ -70,7 +74,7 @@ function SensorCard({
     <Card sx={{ minWidth: "250px" }}>
       <CardHeader title={title} titleTypographyProps={{ variant: "h3" }} />
       <CardContent sx={{ display: "flex", justifyContent: "center" }}>
-        <CircularStatic value={value} unit={unit} />
+        <CircularStatic value={value} percent={percent} unit={unit} />
       </CardContent>
 
       <CardActions disableSpacing>
