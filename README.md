@@ -13,7 +13,7 @@ In india, there are several pollution monitoring stations such as AAQMS and CAAQ
 Several pollution causes is not sustaining and only exists for a few period. Identifying and monitoring such are riskier and coslty. 
 
 ## Our Solution
-Polmo is an IOT based Air pollution sensing network.  It consists of several node types containing different gas sensors. each node will be connected to the cloud directly or through the parent node or nodes in the chain. 
+Polmo is an IOT based Air pollution sensing network. It consists of several node types containing different gas sensors. each node will be connected to the cloud directly or through the parent node or nodes in the chain. 
 
 ## The Plan
  The major plan was to use advanced sensor algorithms, machine learning, and predictions.
