@@ -1,0 +1,12 @@
+.designed-ul::after {
+    background-image: url('./underline.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    content: "";
+    display: block;
+    height: .3em;
+    position: relative;
+    bottom: 0;
+    width: calc(100% + .4em);
+}
+

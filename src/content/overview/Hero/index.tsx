@@ -9,10 +9,17 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 
 import { experimentalStyled } from '@material-ui/core/styles';
-
+import './styles.css'
 const TypographyH1 = experimentalStyled(Typography)(
   ({ theme }) => `
-    font-size: ${theme.typography.pxToRem(50)};
+    font-size: ${theme.typography.pxToRem(60)};
+`
+);
+
+
+const TypographySubtitle = experimentalStyled(Typography)(
+  ({ theme }) => `
+    font-size: ${theme.typography.pxToRem(25)};
 `
 );
 
@@ -84,9 +91,12 @@ function Hero() {
       <Grid spacing={{ xs: 6, md: 10 }} justifyContent="center" alignItems="center" container>
         <Grid item md={10} lg={8} mx="auto">
           <LabelWrapper color="success">Version 1.0.0</LabelWrapper>
-          <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            POLMO - The Advanced Air Pollution Monitoring Network
+          <TypographyH1  variant="h1">
+            POLMO
           </TypographyH1>
+          <TypographySubtitle sx={{ mb: 2 }} className='designed-ul'>
+          The Advanced Air <span  >Pollution Monitoring</span> Network
+          </TypographySubtitle>
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
             variant="h4"

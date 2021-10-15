@@ -2,7 +2,6 @@ import { useRoutes } from 'react-router-dom';
 import routes from './router';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-
 import ThemeProvider from './theme/ThemeProvider';
 import { CssBaseline } from '@material-ui/core';
 

@@ -26,7 +26,7 @@ function Overview() {
         <Box display="flex" justifyContent="center" py={5} alignItems="center">
           <Logo />
         </Box>
-        <Card sx={{ p: 10, mb: 10, borderRadius: 12 }}>
+        <Card sx={{ px: 2, py:10, mb: 10, borderRadius: 12 }}>
           <Hero />
         </Card>
       </Container>
