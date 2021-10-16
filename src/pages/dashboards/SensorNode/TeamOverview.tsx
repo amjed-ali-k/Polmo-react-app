@@ -87,7 +87,7 @@ function TeamOverview() {
               </Badge>
               <Box sx={{ ml: 1.5 }}>
                 <Typography variant="h4" noWrap gutterBottom>
-                  Sugdev
+                  Sukhdev
                 </Typography>
                 <Typography variant="subtitle2" noWrap>
                   Sensors and Mathematical Modeling

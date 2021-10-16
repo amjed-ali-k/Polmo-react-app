@@ -6,6 +6,7 @@ import Logo from "src/components/LogoSign";
 import Hero from "./Hero";
 import NodesSection from "./NodesSection";
 import ProblemSection from "./ProblemSection";
+import FeaturesSection from "./FeaturesSection";
 
 const OverviewWrapper = experimentalStyled(Box)(
   () => `
@@ -38,6 +39,11 @@ function Overview() {
       <Container maxWidth="xl">
         <Grid sx={{ px: 2, py: 5, mb: 5, borderRadius: 12 }}>
           <NodesSection />
+        </Grid>
+      </Container>
+      <Container maxWidth="xl">
+        <Grid sx={{ px: 2, py: 5, mb: 5, borderRadius: 12 }}>
+          <FeaturesSection />
         </Grid>
       </Container>
     </OverviewWrapper>
