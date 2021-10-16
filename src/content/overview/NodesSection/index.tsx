@@ -42,7 +42,7 @@ function NodesSection() {
           <Grid container spacing={5} mt={5}>
             <Grid item>
               <MainTitle mb={5} variant="h1">
-                The Sensor Node Flavours
+                The Flavours
               </MainTitle>
               <Grid container justifyContent="center" spacing={5}>
                 <Grid item sm={6} md={4}>

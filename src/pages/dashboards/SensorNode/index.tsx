@@ -13,6 +13,7 @@ import LineChart from "./LineChart";
 import NodeDetails from "./NodeDetails";
 import { useAQIbackendCalls, useBackEndCalls } from "src/api/hooks";
 import NodeMap from "./NodeMap";
+import InfoAlert from "./InfoAlert";
 
 function DashboardTasks() {
   useAQIbackendCalls(); 
@@ -34,6 +35,10 @@ function DashboardTasks() {
           spacing={3}
         >
           <>
+          <Grid item xs={12}>
+        <InfoAlert />
+
+          </Grid>
           <Grid item xs={12} sm={6} md={8}>
               <NodeDetails />
             </Grid>
