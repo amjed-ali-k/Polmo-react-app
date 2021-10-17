@@ -24,7 +24,7 @@ function InfoAlert() {
           }
           sx={{ mb: 2 }}
         >
-          This site currently hosts the work in progress on the <strong>Polmo UI</strong>. It's still an alpha so expecting breakages!
+          This page is the real-time deployment of an active working branch in the repository. So there will be breakages!
         </Alert>
       </Collapse>
       {/* <Button
