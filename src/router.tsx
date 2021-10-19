@@ -21,10 +21,6 @@ const Overview = Loader(lazy(() => import('src/content/overview')));
 
 const Polmo = Loader(lazy(() => import('src/pages/dashboards/SensorNode')));
 
-// Applications
-
-
-
 
 // Status
 
