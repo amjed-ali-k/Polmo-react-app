@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import "mapbox-gl/dist/mapbox-gl.css";
 // const mapboxgl = React.lazy<mapboxgl>(() => import('mapbox-gl'))
-import mapboxgl from "mapbox-gl";
+var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js'); // eslint-disable-line import/no-webpack-loader-syntax
 
 function NodeMap({longitude = 75.379747, lattitude = 11.986639}) {
   const mapContainer = useRef(null);  
@@ -31,7 +31,7 @@ function NodeMap({longitude = 75.379747, lattitude = 11.986639}) {
       setZoom(map.current.getZoom().toFixed(2));
     });
   });
-  
+
   return (
     <Card sx={{ height: "100%" }}>
       <CardContent>
