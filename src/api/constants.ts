@@ -45,7 +45,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
+      max: 2,
       unit: "ppm",
     },
   },
@@ -61,7 +61,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
+      max: 5,
       unit: "ppb",
     },
   },
@@ -93,7 +93,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 5000,
+      max: 100,
       unit: "ppm",
     },
   },
@@ -109,7 +109,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 1000,
+      max: 20,
       unit: "ppb",
     },
   },
@@ -125,7 +125,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
+      max: 5,
       unit: "ppm",
     },
   },
@@ -141,7 +141,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
+      max: 5,
       unit: "ppm",
     },
   },
@@ -157,7 +157,7 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 1000,
+      max: 600,
       unit: "ppm",
     },
   },
@@ -173,8 +173,8 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
-      unit: "ppm",
+      max: 200,
+      unit: "ug/m3",
     },
   },
   {
@@ -189,8 +189,8 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
-      unit: "ppm",
+      max: 200,
+      unit: "ug/m3",
     },
   },
   {
@@ -205,8 +205,8 @@ export const SensorDetails: SensorType[] = [
     },
     settings: {
       min: 0,
-      max: 100,
-      unit: "ppm",
+      max: 200,
+      unit: "ug/m3",
     },
   },
   {
@@ -266,7 +266,7 @@ export interface ServerData {
 }
 
 export interface SensorData {
-  time: Date;
+  time: string;
   value: number;
   slug: string;
 }

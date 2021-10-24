@@ -3,27 +3,24 @@ import { Radar } from "react-chartjs-2";
 
 import { useAtom } from "jotai";
 import { counterAtom, loadedAtom } from "src/api/hooks";
-import { sensors } from "src/api/constants";
-
+import { SensorDetails } from "src/api/constants";
 
 function LiveValues() {
-
   const [sensorReadings] = useAtom(counterAtom);
-  const [loaded] = useAtom(loadedAtom)
+  const [loaded] = useAtom(loadedAtom);
 
-  let readingsArray = []
-  if(loaded) {
-    sensors.forEach((item)=> {
-     
-      console.log('SR', item);
-      console.log('ST', sensorReadings)
-     if(sensorReadings[item].value)
-    readingsArray.push(sensorReadings[item].value)
-  })}
-  
+  let readingsArray = [];
+  if (loaded) {
+    SensorDetails.forEach((item) => {
+      if (sensorReadings[item.slug]?.value) {
+        const rdg = parseInt(sensorReadings[item.slug].value);
+        readingsArray.push((rdg / item.settings.max) * 100);
+      }
+    });
+  }
 
   const data = {
-    labels: sensors,
+    labels: SensorDetails.map((e) => e.slug),
     datasets: [
       {
         // label: '# of Votes',
@@ -57,8 +54,11 @@ function LiveValues() {
         titleTypographyProps={{ variant: "h3" }}
       />
       <CardContent>
-        {loaded? <Radar data={data} options={options} />: <Skeleton variant="rectangular" width={'100%'} height={'248px'} />
-  }
+        {loaded ? (
+          <Radar data={data} options={options} />
+        ) : (
+          <Skeleton variant="rectangular" width={"100%"} height={"248px"} />
+        )}
       </CardContent>
     </Card>
   );

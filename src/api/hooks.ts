@@ -1,6 +1,6 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
-import getWeek from "date-fns/getWeek";
+import { parseJSON, getWeek } from 'date-fns'
 
 import { SensorDataCollection, sensors } from "./constants";
 import { getData, getAqiData } from "./backend";
@@ -59,7 +59,7 @@ export function useBackEndCalls() {
   const [sensorReadings, setSensorReadings] = useAtom(counterAtom);
   const [sensorHistory, setSensorHistory] = useAtom(sensorHistoryAtom);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [loaded, setLoaded] = useAtom(loadedAtom);
+  const [, setLoaded] = useAtom(loadedAtom);
 
   useEffect(() => {
     const val = setInterval(() => {
@@ -97,7 +97,7 @@ const addValuesToSensorHistory = (
     // const element = slugval.replace(".", "_");
     if (data[element]) {
       // Catch Latest Time Stamp from the array.
-      const date = data[element].time;
+      const date = parseJSON(data[element].time);
       if (time < date) {
         time = date;
       }

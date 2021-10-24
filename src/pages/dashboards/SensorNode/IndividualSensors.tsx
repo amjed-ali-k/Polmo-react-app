@@ -11,6 +11,7 @@ import {
   Skeleton,
 } from "@material-ui/core";
 import { experimentalStyled } from "@material-ui/core/styles";
+import { format, parseJSON } from 'date-fns'
 
 import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 import React from "react";
@@ -44,6 +45,7 @@ function IndividualSensors() {
               percent={percent}
               name={item.name}
               status="Active"
+              date={format(parseJSON(sensorReadings[item.slug]?.time), 'p PPPP')}
               unit={item.settings.unit}
             />:<Skeleton variant="rectangular" width={250} height={258} />}
           </Grid>
