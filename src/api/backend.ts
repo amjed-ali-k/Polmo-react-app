@@ -4,7 +4,7 @@ import { SensorDataCollection, sensors, ServerData } from "./constants";
 export const getData = async (): Promise<SensorDataCollection> => {
   let sd = {};
   const { data } = await axios.get<ServerData[]>(
-    "https://6ejhix.deta.dev/sensor/node/NodeMCU-1.0/last/all"
+    "https://6ejhix.deta.dev/sensor/node/752b40ba-ebc0/last/all"
   );
   data.forEach((element) => {
     if (sensors.includes(element.sensor)) {
