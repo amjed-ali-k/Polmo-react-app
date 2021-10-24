@@ -94,7 +94,7 @@ export const SensorDetails: SensorType[] = [
     settings: {
       min: 0,
       max: 100,
-      unit: "ppm",
+      unit: "ppb",
     },
   },
   {
