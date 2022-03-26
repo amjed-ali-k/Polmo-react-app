@@ -21,7 +21,7 @@ function Footer() {
         >
           <Box>
             <Typography variant="subtitle1">
-             2021 - Made by The Polmo Team
+             2021 - Made by The Polmo ( Pollution Monitoring) Team
             </Typography>
           </Box>
           <Typography sx={{ pt: { xs: 2, md: 0 } }} variant="subtitle1">
