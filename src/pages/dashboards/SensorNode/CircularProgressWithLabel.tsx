@@ -37,7 +37,7 @@ function CircularProgressWithLabel({value,percent, unit='/ 100', ...rest}) {
         }}
       >
         <Typography variant="h1" component="div" color="text.secondary">
-          {`${Math.round(value)}`}
+          {`${Number(value).toFixed(2)}}`}
         </Typography>
         <Typography variant='caption' sx={{ mt:'-8px'}}>
         {`${unit}`}
