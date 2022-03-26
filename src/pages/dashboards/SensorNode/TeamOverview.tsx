@@ -14,7 +14,7 @@ function TeamOverview() {
   return (
     <>
       {" "}
-      <Typography variant="h3" component="h3" gutterBottom>
+      {/* <Typography variant="h3" component="h3" gutterBottom>
         The Team
       </Typography>
       <Grid container spacing={3}>
@@ -100,7 +100,7 @@ function TeamOverview() {
             </Typography>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}
     </>
   );
 }
