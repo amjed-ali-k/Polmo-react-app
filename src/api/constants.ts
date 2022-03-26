@@ -1,10 +1,12 @@
+import {format} from 'date-fns'
+
 export const PNodeDetails = {
   id: "752b40ba-ebc0",
   name: "PSN-Urban-CAN",
   status: "online",
   commissioned: "12-July-2021",
   address: "GEC Building, Dharmasala, Kannur - 670563, Kerala, India",
-  lastUpdated: new Date().toLocaleDateString() + " 12: 15 PM",
+  lastUpdated: format(new Date(), 'PPPPpp'),
   upTime: "42 Days, 5 Hours, 32 Minutes",
   battery: 100,
   charging: true,

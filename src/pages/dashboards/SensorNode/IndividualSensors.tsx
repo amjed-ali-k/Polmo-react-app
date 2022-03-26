@@ -45,7 +45,7 @@ function IndividualSensors() {
               percent={percent}
               name={item.name}
               status="Active"
-              date={format(parseJSON(sensorReadings[item.slug]?.time), 'p PPPP')}
+              date={format(parseJSON(sensorReadings[item.slug]?.time), 'pp PPPP')}
               unit={item.settings.unit}
             />:<Skeleton variant="rectangular" width={250} height={258} />}
           </Grid>
