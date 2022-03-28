@@ -15,7 +15,7 @@ function TeamOverview() {
     <>
       {" "}
       <Typography variant="h5" component="h5" gutterBottom>
-        A project by Govt College of Engineering, Kannur. ECE Dept.
+        A project by Govt College of Engineering, Kannur. ECE Dept. and R.T.D.C
       </Typography>
       {/* <Typography variant="h3" component="h3" gutterBottom>
         The Team
